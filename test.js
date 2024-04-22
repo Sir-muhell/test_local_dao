@@ -1,7 +1,6 @@
 const algosdk = require("algosdk");
 
-const mnemonic =
-  "earn divorce salad blast absurd inmate scheme laundry child art neutral upon cluster pudding hospital strike pause sleep custom orchard endorse unable mixture abstract clown";
+const mnemonic = "";
 const account = algosdk.mnemonicToSecretKey(mnemonic);
 const address = account.addr;
 
