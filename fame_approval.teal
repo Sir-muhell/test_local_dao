@@ -1,0 +1,1076 @@
+#pragma version 6
+txn ApplicationID
+int 0
+==
+bnz main_l77
+txn OnCompletion
+int DeleteApplication
+==
+bnz main_l76
+txn OnCompletion
+int UpdateApplication
+==
+bnz main_l75
+txn OnCompletion
+int OptIn
+==
+bnz main_l74
+txn OnCompletion
+int CloseOut
+==
+bnz main_l73
+txn OnCompletion
+int NoOp
+==
+bnz main_l7
+err
+main_l7:
+txna ApplicationArgs 0
+byte "ci"
+==
+bnz main_l72
+txna ApplicationArgs 0
+byte "oi"
+==
+bnz main_l71
+txna ApplicationArgs 0
+byte "oo"
+==
+bnz main_l70
+txna ApplicationArgs 0
+byte "pr"
+==
+bnz main_l59
+txna ApplicationArgs 0
+byte "u"
+==
+bnz main_l48
+txna ApplicationArgs 0
+byte "d"
+==
+bnz main_l37
+txna ApplicationArgs 0
+byte "ls"
+==
+bnz main_l36
+txna ApplicationArgs 0
+byte "x"
+==
+bnz main_l20
+txna ApplicationArgs 0
+byte "w"
+==
+bnz main_l17
+err
+main_l17:
+byte "et"
+app_global_get
+global LatestTimestamp
+<
+assert
+byte "et"
+app_global_get
+byte "o"
+app_global_get
++
+global LatestTimestamp
+>
+bnz main_l19
+main_l18:
+gtxn 0 TypeEnum
+int pay
+==
+assert
+gtxn 0 Amount
+int 1000000
+>=
+assert
+gtxn 0 Receiver
+global CurrentApplicationAddress
+==
+assert
+txna ApplicationArgs 1
+btoi
+txn Sender
+byte "s"
+app_local_get
+<=
+assert
+txna Assets 0
+int 628646526
+==
+assert
+itxn_begin
+int axfer
+itxn_field TypeEnum
+txna Assets 0
+itxn_field XferAsset
+txn Sender
+itxn_field AssetReceiver
+txna ApplicationArgs 1
+btoi
+itxn_field AssetAmount
+itxn_submit
+txn Sender
+byte "s"
+txn Sender
+byte "s"
+app_local_get
+txna ApplicationArgs 1
+btoi
+-
+app_local_put
+byte "tl"
+byte "tl"
+app_global_get
+txna ApplicationArgs 1
+btoi
+-
+app_global_put
+txn Sender
+byte "b"
+global LatestTimestamp
+app_local_put
+txn Sender
+byte "nv"
+int 0
+app_local_put
+int 1
+return
+main_l19:
+txn Sender
+byte "ra"
+app_global_get
+!=
+assert
+b main_l18
+main_l20:
+byte "p"
+app_global_get
+byte "A"
+!=
+byte "et"
+app_global_get
+global LatestTimestamp
+<
+&&
+byte "et"
+app_global_get
+byte "o"
+app_global_get
++
+global LatestTimestamp
+>
+&&
+assert
+txna Accounts 1
+byte "ra"
+app_global_get
+==
+assert
+byte "uv"
+app_global_get
+byte "dv"
+app_global_get
+>
+byte "uv"
+app_global_get
+byte "dv"
+app_global_get
++
+byte "tl"
+app_global_get
+byte "t"
+app_global_get
+*
+int 100
+/
+>
+&&
+bnz main_l22
+main_l21:
+byte "uv"
+int 0
+app_global_put
+byte "dv"
+int 0
+app_global_put
+byte "m"
+int 0
+app_global_put
+byte "p"
+byte "A"
+app_global_put
+byte "pt"
+byte "A"
+app_global_put
+byte "pk"
+int 0
+app_global_put
+byte "ra"
+global ZeroAddress
+app_global_put
+byte "pd"
+global ZeroAddress
+app_global_put
+int 1
+return
+main_l22:
+byte "pt"
+app_global_get
+byte "cd"
+==
+bnz main_l35
+byte "pt"
+app_global_get
+byte "ch"
+==
+bnz main_l34
+byte "pt"
+app_global_get
+byte "pa"
+==
+bnz main_l31
+byte "pt"
+app_global_get
+byte "n"
+==
+bnz main_l30
+byte "pt"
+app_global_get
+byte "A"
+!=
+bnz main_l28
+err
+main_l28:
+byte "uv"
+int 0
+app_global_put
+byte "dv"
+int 0
+app_global_put
+byte "m"
+int 0
+app_global_put
+byte "p"
+byte "A"
+app_global_put
+byte "pt"
+byte "A"
+app_global_put
+byte "pk"
+int 0
+app_global_put
+byte "ra"
+global ZeroAddress
+app_global_put
+byte "pd"
+global ZeroAddress
+app_global_put
+main_l29:
+itxn_begin
+int pay
+itxn_field TypeEnum
+txna Accounts 1
+itxn_field Receiver
+byte "m"
+app_global_get
+int 10
+/
+itxn_field Amount
+itxn_submit
+itxn_begin
+int pay
+itxn_field TypeEnum
+txn Sender
+itxn_field Receiver
+int 1000000
+itxn_field Amount
+itxn_submit
+b main_l21
+main_l30:
+txna Assets 0
+byte "pk"
+app_global_get
+==
+assert
+txna Accounts 1
+byte "ra"
+app_global_get
+==
+assert
+itxn_begin
+int axfer
+itxn_field TypeEnum
+txna Assets 0
+itxn_field XferAsset
+txna Accounts 1
+itxn_field AssetReceiver
+byte "pv"
+app_global_get
+itxn_field AssetAmount
+itxn_submit
+b main_l29
+main_l31:
+txna Accounts 1
+byte "ra"
+app_global_get
+==
+assert
+byte "pv"
+app_global_get
+int 1
+global CurrentApplicationAddress
+balance
+*
+int 10
+/
+>
+bnz main_l33
+main_l32:
+itxn_begin
+int pay
+itxn_field TypeEnum
+txna Accounts 1
+itxn_field Receiver
+byte "pv"
+app_global_get
+itxn_field Amount
+itxn_submit
+b main_l29
+main_l33:
+byte "uv"
+app_global_get
+int 666667
+>=
+assert
+b main_l32
+main_l34:
+byte "pv"
+app_global_get
+int 2
+byte "t"
+app_global_get
+*
+int 3
+/
+>
+byte "pv"
+app_global_get
+int 4
+byte "t"
+app_global_get
+*
+int 3
+/
+<
+&&
+byte "pv"
+app_global_get
+int 5
+>
+&&
+byte "pv"
+app_global_get
+int 75
+<
+&&
+assert
+byte "t"
+byte "pv"
+app_global_get
+app_global_put
+b main_l29
+main_l35:
+byte "pv"
+app_global_get
+int 600
+>=
+assert
+byte "pk"
+app_global_get
+int 1800
+>=
+assert
+byte "r"
+byte "pv"
+app_global_get
+app_global_put
+byte "o"
+byte "pk"
+app_global_get
+app_global_put
+b main_l29
+main_l36:
+gtxn 0 TypeEnum
+int axfer
+==
+assert
+global GroupSize
+int 2
+==
+assert
+gtxn 0 XferAsset
+int 628646526
+==
+assert
+gtxn 0 AssetReceiver
+global CurrentApplicationAddress
+==
+assert
+txn Sender
+byte "s"
+txn Sender
+byte "s"
+app_local_get
+gtxn 0 AssetAmount
++
+app_local_put
+byte "tl"
+byte "tl"
+app_global_get
+gtxn 0 AssetAmount
++
+app_global_put
+int 1
+return
+main_l37:
+txn Sender
+byte "s"
+app_local_get
+int 0
+>
+assert
+txn Sender
+byte "lv"
+app_local_get
+byte "et"
+app_global_get
+byte "r"
+app_global_get
+-
+<
+assert
+global GroupSize
+int 1
+==
+assert
+global LatestTimestamp
+byte "et"
+app_global_get
+<
+assert
+txn Sender
+byte "s"
+app_local_get
+store 0
+txn Sender
+byte "nv"
+app_local_get
+int 0
+==
+bnz main_l47
+txn Sender
+byte "nv"
+app_local_get
+int 5
+>=
+bnz main_l46
+load 0
+txn Sender
+byte "s"
+app_local_get
+txn Sender
+byte "nv"
+app_local_get
+*
+int 10
+/
++
+store 0
+main_l40:
+global LatestTimestamp
+txn Sender
+byte "b"
+app_local_get
+int 2629800
++
+<
+bnz main_l45
+global LatestTimestamp
+txn Sender
+byte "b"
+app_local_get
+int 13149000
++
+>=
+bnz main_l44
+load 0
+txn Sender
+byte "s"
+app_local_get
+global LatestTimestamp
+txn Sender
+byte "b"
+app_local_get
+-
+*
+int 26298000
+/
++
+store 0
+main_l43:
+byte "dv"
+byte "dv"
+app_global_get
+load 0
++
+app_global_put
+byte "m"
+byte "m"
+app_global_get
+int 1
++
+app_global_put
+txn Sender
+byte "lv"
+global LatestTimestamp
+app_local_put
+txn Sender
+byte "nv"
+txn Sender
+byte "nv"
+app_local_get
+int 1
++
+app_local_put
+int 1
+return
+main_l44:
+load 0
+txn Sender
+byte "s"
+app_local_get
+int 2
+/
++
+store 0
+b main_l43
+main_l45:
+load 0
+int 0
+-
+store 0
+b main_l43
+main_l46:
+load 0
+txn Sender
+byte "s"
+app_local_get
+int 2
+/
++
+store 0
+b main_l40
+main_l47:
+load 0
+int 0
+-
+store 0
+b main_l40
+main_l48:
+txn Sender
+byte "s"
+app_local_get
+int 0
+>
+assert
+txn Sender
+byte "lv"
+app_local_get
+byte "et"
+app_global_get
+byte "r"
+app_global_get
+-
+<
+assert
+global GroupSize
+int 1
+==
+assert
+global LatestTimestamp
+byte "et"
+app_global_get
+<
+assert
+txn Sender
+byte "s"
+app_local_get
+store 0
+txn Sender
+byte "nv"
+app_local_get
+int 0
+==
+bnz main_l58
+txn Sender
+byte "nv"
+app_local_get
+int 5
+>=
+bnz main_l57
+load 0
+txn Sender
+byte "s"
+app_local_get
+txn Sender
+byte "nv"
+app_local_get
+*
+int 10
+/
++
+store 0
+main_l51:
+global LatestTimestamp
+txn Sender
+byte "b"
+app_local_get
+int 2629800
++
+<
+bnz main_l56
+global LatestTimestamp
+txn Sender
+byte "b"
+app_local_get
+int 13149000
++
+>=
+bnz main_l55
+load 0
+txn Sender
+byte "s"
+app_local_get
+global LatestTimestamp
+txn Sender
+byte "b"
+app_local_get
+-
+*
+int 26298000
+/
++
+store 0
+main_l54:
+byte "uv"
+byte "uv"
+app_global_get
+load 0
++
+app_global_put
+byte "m"
+byte "m"
+app_global_get
+int 1
++
+app_global_put
+txn Sender
+byte "lv"
+global LatestTimestamp
+app_local_put
+txn Sender
+byte "nv"
+txn Sender
+byte "nv"
+app_local_get
+int 1
++
+app_local_put
+int 1
+return
+main_l55:
+load 0
+txn Sender
+byte "s"
+app_local_get
+int 2
+/
++
+store 0
+b main_l54
+main_l56:
+load 0
+int 0
+-
+store 0
+b main_l54
+main_l57:
+load 0
+txn Sender
+byte "s"
+app_local_get
+int 2
+/
++
+store 0
+b main_l51
+main_l58:
+load 0
+int 0
+-
+store 0
+b main_l51
+main_l59:
+global CurrentApplicationAddress
+txna Assets 0
+asset_holding_get AssetBalance
+store 2
+store 1
+global GroupSize
+int 2
+==
+assert
+gtxn 1 TypeEnum
+int pay
+==
+assert
+gtxn 1 Amount
+int 2000000
+>=
+assert
+gtxn 1 Receiver
+global CurrentApplicationAddress
+==
+assert
+byte "et"
+app_global_get
+byte "o"
+app_global_get
++
+global LatestTimestamp
+<
+assert
+txna ApplicationArgs 2
+byte "pa"
+==
+bnz main_l67
+main_l60:
+txna ApplicationArgs 2
+byte "n"
+==
+txna ApplicationArgs 4
+btoi
+int 628646526
+==
+txna ApplicationArgs 4
+btoi
+int 628646526
+==
+||
+&&
+bnz main_l66
+main_l61:
+txna ApplicationArgs 2
+byte "n"
+==
+txna ApplicationArgs 4
+btoi
+int 148814612
+==
+&&
+bnz main_l65
+main_l62:
+txna ApplicationArgs 2
+byte "n"
+==
+txna ApplicationArgs 4
+btoi
+int 10458941
+==
+&&
+bnz main_l64
+main_l63:
+txn Sender
+byte "s"
+app_local_get
+int 0
+>
+assert
+byte "p"
+txna ApplicationArgs 1
+app_global_put
+byte "pt"
+txna ApplicationArgs 2
+app_global_put
+byte "pv"
+txna ApplicationArgs 3
+btoi
+app_global_put
+byte "pk"
+txna ApplicationArgs 4
+btoi
+app_global_put
+byte "uv"
+int 0
+app_global_put
+byte "dv"
+int 0
+app_global_put
+byte "et"
+global LatestTimestamp
+byte "r"
+app_global_get
++
+app_global_put
+byte "pd"
+txn Sender
+app_global_put
+byte "ra"
+txna Accounts 1
+app_global_put
+int 1
+return
+main_l64:
+txna ApplicationArgs 3
+btoi
+int 10000000000
+<
+assert
+txna Assets 0
+txna ApplicationArgs 4
+btoi
+==
+assert
+byte "tl"
+app_global_get
+load 1
+txna ApplicationArgs 3
+btoi
+-
+<=
+assert
+b main_l63
+main_l65:
+txna ApplicationArgs 3
+btoi
+load 1
+int 10
+/
+<
+assert
+txna Assets 0
+txna ApplicationArgs 4
+btoi
+==
+assert
+byte "tl"
+app_global_get
+load 1
+txna ApplicationArgs 3
+btoi
+-
+<=
+assert
+b main_l62
+main_l66:
+txna ApplicationArgs 3
+btoi
+load 1
+int 10
+/
+<
+assert
+txna Assets 0
+txna ApplicationArgs 4
+btoi
+==
+assert
+byte "tl"
+app_global_get
+load 1
+txna ApplicationArgs 3
+btoi
+-
+<=
+assert
+b main_l61
+main_l67:
+txna ApplicationArgs 1
+byte "a"
+==
+bnz main_l69
+txna ApplicationArgs 3
+btoi
+global CurrentApplicationAddress
+balance
+int 10
+/
+<
+assert
+b main_l60
+main_l69:
+txna ApplicationArgs 3
+btoi
+global CurrentApplicationAddress
+balance
+global CurrentApplicationAddress
+min_balance
+-
+<=
+assert
+b main_l60
+main_l70:
+global CurrentApplicationAddress
+txna Assets 0
+asset_holding_get AssetBalance
+store 4
+store 3
+load 3
+int 0
+==
+assert
+itxn_begin
+int axfer
+itxn_field TypeEnum
+global CurrentApplicationAddress
+itxn_field AssetReceiver
+txn Sender
+itxn_field AssetCloseTo
+int 0
+itxn_field AssetAmount
+txna Assets 0
+itxn_field XferAsset
+itxn_submit
+int 1
+return
+main_l71:
+global GroupSize
+int 2
+>=
+assert
+gtxn 0 TypeEnum
+int pay
+==
+assert
+gtxn 0 Amount
+int 1000000
+>=
+assert
+gtxn 0 Receiver
+global CurrentApplicationAddress
+==
+assert
+int axfer
+itxn_field TypeEnum
+global CurrentApplicationAddress
+itxn_field AssetReceiver
+int 0
+itxn_field AssetAmount
+txna Assets 0
+itxn_field XferAsset
+itxn_submit
+int 1
+return
+main_l72:
+txn Sender
+global CreatorAddress
+==
+assert
+global LatestTimestamp
+byte "e"
+app_global_get
+<
+assert
+global GroupSize
+int 1
+>=
+assert
+itxn_begin
+int axfer
+itxn_field TypeEnum
+global CurrentApplicationAddress
+itxn_field AssetReceiver
+int 0
+itxn_field AssetAmount
+txna Assets 0
+itxn_field XferAsset
+itxn_submit
+int 1
+return
+main_l73:
+int 0
+return
+main_l74:
+txn Sender
+byte "s"
+int 0
+app_local_put
+txn Sender
+byte "lv"
+int 0
+app_local_put
+txn Sender
+byte "nv"
+int 0
+app_local_put
+txn Sender
+byte "b"
+global LatestTimestamp
+app_local_put
+int 1
+return
+main_l75:
+int 0
+return
+main_l76:
+int 0
+return
+main_l77:
+txna ApplicationArgs 0
+btoi
+int 300
+>=
+assert
+byte "uv"
+int 0
+app_global_put
+byte "dv"
+int 0
+app_global_put
+byte "r"
+txna ApplicationArgs 0
+btoi
+app_global_put
+byte "o"
+int 300
+app_global_put
+byte "p"
+byte "A"
+app_global_put
+byte "pt"
+byte "A"
+app_global_put
+byte "pk"
+int 0
+app_global_put
+byte "t"
+int 30
+app_global_put
+byte "tl"
+int 0
+app_global_put
+byte "pd"
+global ZeroAddress
+app_global_put
+byte "ra"
+global ZeroAddress
+app_global_put
+byte "e"
+global LatestTimestamp
+int 604800
++
+app_global_put
+int 1
+return
